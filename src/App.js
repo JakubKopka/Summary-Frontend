@@ -1,25 +1,84 @@
-import logo from './logo.svg';
 import './App.css';
+import Login from "./component/login";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+} from "react-router-dom";
+import ResetPassword from "./component/reset-password.js";
+import UserContext from "./component/context/user-context";
+import {useState} from "react";
+import UserProfile from "./component/user-profile";
+import Register from "./component/register";
+import Home from "./component/home";
+import PrivateRoute from "./component/route/private-route";
+import MySummary from "./component/my-summary";
+import AuthorizedOnlyRoute from "./component/route/authorized-only-route";
+import PublicRoute from "./component/route/public-route";
+import AlertContext from "./component/context/alert-context";
+import ModalContext from "./component/context/modal-context";
+
+const route = {
+    login: "/login"
+}
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [userInfo, setUserInfo] = useState();
+    const [isLoggedIn, setLoggedIn] = useState(false)
+
+    const defaultUserContext = {
+        userInfo,
+        setUserInfo,
+        setLoggedIn,
+        isLoggedIn
+    }
+
+    const [isOpen, setOpen] = useState(false)
+    const [message, setMessage] = useState("")
+    const [statusCode, setStatusCode] = useState(0)
+    const [variant, setVariant] = useState("primary")
+
+    const defaultAlertContext = {
+        isOpen,
+        setOpen,
+        message,
+        setMessage,
+        statusCode,
+        setStatusCode,
+        variant,
+        setVariant
+    }
+
+    const [show, setShow] = useState(false)
+    const handleClose = () => setShow(false)
+    const handleShow = () => setShow(true)
+
+    const defaultModalContext = {
+        show, setShow, handleClose, handleShow
+    }
+
+    return (
+        <UserContext.Provider value={defaultUserContext}>
+            <AlertContext.Provider value={defaultAlertContext}>
+                <ModalContext.Provider value={defaultModalContext}>
+                    <Router>
+                        <Switch>
+                            <Route path="/login" render={() => <AuthorizedOnlyRoute component={Login}/>}/>
+                            <Route path="/register" render={() => <AuthorizedOnlyRoute component={Register}/>}/>
+                            <Route path="/reset-password"
+                                   render={() => <AuthorizedOnlyRoute component={ResetPassword}/>}/>
+
+                            <Route path="/user" render={() => <PrivateRoute component={UserProfile}/>}/>
+                            <Route path="/my-stock" render={() => <PrivateRoute component={MySummary}/>}/>
+
+                            <Route path="/" render={() => <PublicRoute component={Home}/>}/>
+                        </Switch>
+                    </Router>
+                </ModalContext.Provider>
+            </AlertContext.Provider>
+        </UserContext.Provider>
+    );
+
 }
 
 export default App;
