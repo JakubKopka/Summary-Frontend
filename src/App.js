@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import ResetPassword from "./component/reset-password.js";
 import UserContext from "./component/context/user-context";
-import {useState} from "react";
+import React, {useState} from "react";
 import UserProfile from "./component/user-profile";
 import Register from "./component/register";
 import Home from "./component/home";
@@ -17,6 +17,7 @@ import AuthorizedOnlyRoute from "./component/route/authorized-only-route";
 import PublicRoute from "./component/route/public-route";
 import AlertContext from "./component/context/alert-context";
 import ModalContext from "./component/context/modal-context";
+import {Button, Modal} from "react-bootstrap";
 
 const route = {
     login: "/login"
@@ -52,9 +53,13 @@ function App() {
     const [show, setShow] = useState(false)
     const handleClose = () => setShow(false)
     const handleShow = () => setShow(true)
-
+    const [heading, setHeading] = useState("Modal heading")
+    const [content, setContent] = useState("Modal Content")
+    const [buttonTitle, setButtonTitle] = useState("Title")
+    const buttonFunction = handleClose
     const defaultModalContext = {
-        show, setShow, handleClose, handleShow
+        show, setShow, handleClose, handleShow, content, setContent, heading, setHeading, buttonTitle, setButtonTitle,
+        buttonFunction
     }
 
     return (
