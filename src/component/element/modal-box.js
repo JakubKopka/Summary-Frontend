@@ -13,11 +13,11 @@ const ModalBox = () => {
                     <Modal.Title>{heading}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>{content}</Modal.Body>
-                <Modal.Footer>
-                    <Button variant="primary" onClick={buttonFunction}>
-                        {buttonTitle}
-                    </Button>
-                </Modal.Footer>
+                {/*<Modal.Footer>*/}
+                {/*    <Button variant="primary" onClick={buttonFunction}>*/}
+                {/*        {buttonTitle}*/}
+                {/*    </Button>*/}
+                {/*</Modal.Footer>*/}
             </Modal>
         </>
     )

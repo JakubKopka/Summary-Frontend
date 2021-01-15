@@ -51,15 +51,23 @@ function App() {
     }
 
     const [show, setShow] = useState(false)
-    const handleClose = () => setShow(false)
-    const handleShow = () => setShow(true)
+    const handleClose = () => {
+        setShow(false)
+        // setButtonFunction(()=>{alert("elo")});
+        // setHeading("")
+        // setContent("")
+        // setButtonTitle("")
+    }
+    const handleShow = () => setShow(true);
     const [heading, setHeading] = useState("Modal heading")
     const [content, setContent] = useState("Modal Content")
     const [buttonTitle, setButtonTitle] = useState("Title")
-    const buttonFunction = handleClose
+    const [buttonFunction, setButtonFunction] = useState(handleClose)
+
+
     const defaultModalContext = {
         show, setShow, handleClose, handleShow, content, setContent, heading, setHeading, buttonTitle, setButtonTitle,
-        buttonFunction
+        buttonFunction, setButtonFunction
     }
 
     return (

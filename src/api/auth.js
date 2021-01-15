@@ -22,7 +22,7 @@ export const resetPassword = (data) => {
 }
 
 export const updateUser = (data, token) => {
-    return axios.post('http://localhost:8080/user/update', data, createAuthHeaders(token))
+    return axios.post(`${API_URL}/user/update`, data, createAuthHeaders(token))
 }
 
 const createAuthHeaders = (token) => {
