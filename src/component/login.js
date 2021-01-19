@@ -5,7 +5,7 @@ import React, {useContext, useEffect, useState} from "react";
 import {useForm} from "react-hook-form";
 import {PasswordIcon, UserIcon} from "./element/icons";
 import UserContext from "./context/user-context";
-import {BottomBox} from "./element/box";
+import {BottomElements} from "./element/box";
 import Cookie from "js-cookie"
 import {login} from "../api/auth";
 import AlertContext from "./context/alert-context";
@@ -67,10 +67,10 @@ const Login = () => {
                             </InputGroup>
                             <Button type="submit" variant="success">Sign in!</Button>
                         </form>
-                        <BottomBox>
+                        <BottomElements>
                             <Link to="/reset-password">Forgot password?</Link>
                             <Link to="/register">Creat new account</Link>
-                        </BottomBox>
+                        </BottomElements>
                     </div>
                 )}
         </BoxLayout>

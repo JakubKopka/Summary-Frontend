@@ -22,7 +22,6 @@ const Menu = () => {
     const history = useHistory();
 
     const deleteToken = () => {
-        console.log("Delete token form cookies")
         Cookie.remove("token")
         setLoggedIn(false)
         history.push('/')

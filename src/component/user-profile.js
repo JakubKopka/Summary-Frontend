@@ -2,7 +2,7 @@ import UserContext from "./context/user-context";
 import styled from "styled-components";
 import {useContext, useState} from "react";
 import Layout from "./layout/layout";
-import {Box, CenterBox} from "./element/box";
+import {Box, CenterElement} from "./element/box";
 import {Badge, Button, Form, FormControl} from "react-bootstrap";
 import {useForm} from "react-hook-form";
 import Cookie from "js-cookie"
@@ -22,8 +22,6 @@ const UserProfile = () => {
 
     const onSubmit = data => {
         const {password, newPassword, confirmedPassword} = data
-        console.log(data)
-        //TODO
         if (password !== "" && newPassword !== confirmedPassword && newPassword === "") {
             setOpen(true)
             setMessage("Passwords don't match!")
@@ -31,7 +29,6 @@ const UserProfile = () => {
         } else {
             const token = Cookie.get("token") ? Cookie.get("token") : null;
             updateUser(data, token).then(response => {
-                console.log(response)
                 setUserInfo(response.data)
                 setOpen(true)
                 setMessage("Profile was updated successfully!")
@@ -98,11 +95,11 @@ const UserProfile = () => {
                                     <Form.Control name="firstName" ref={register({required: true})} type="text"
                                                   defaultValue={userInfo.firstName}/>
                                 </Form.Group>
-                                <CenterBox>
+                                <CenterElement>
                                     <Button variant="primary" type="submit">
                                         Save
                                     </Button>
-                                </CenterBox>
+                                </CenterElement>
                             </UserForm>
 
 

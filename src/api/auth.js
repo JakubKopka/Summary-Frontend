@@ -2,15 +2,14 @@ import axios from "axios";
 import {useContext, useEffect} from "react";
 import Cookie from "js-cookie";
 import UserContext from "../component/context/user-context";
-
-const API_URL = "http://localhost:8080"
+import {API_URL, createAuthHeaders} from "./base";
 
 export const login = ({username, password}) => {
     return axios.post(`${API_URL}/user/login`, {username, password})
 }
 
-export const userInfo = (token) => {
-    return axios.get(`${API_URL}/user/verify-token`, createAuthHeaders(token))
+export const userInfo = () => {
+    return axios.get(`${API_URL}/user/verify-token`, createAuthHeaders())
 }
 
 export const registerUser = (data) => {
@@ -21,17 +20,10 @@ export const resetPassword = (data) => {
     return axios.post(`${API_URL}/user/reset-password`, data);
 }
 
-export const updateUser = (data, token) => {
-    return axios.post(`${API_URL}/user/update`, data, createAuthHeaders(token))
+export const updateUser = (data) => {
+    return axios.post(`${API_URL}/user/update`, data, createAuthHeaders())
 }
 
-const createAuthHeaders = (token) => {
-    return ({
-        headers: {
-            'Authorization': `Bearer ${token}`
-        }
-    })
-}
 
 export const validToken = () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -47,7 +39,6 @@ export const validToken = () => {
             })
                 .catch(function (error) {
                     if (error.response) {
-                        console.log(error)
                         Cookie.remove('token')
                         setUserInfo(null)
                         setLoggedIn(false)

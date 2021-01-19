@@ -1,18 +1,13 @@
-import {Button, FormControl, InputGroup, Table} from "react-bootstrap";
-import {Box} from "./element/box";
+import {Button, FormControl, InputGroup, Spinner, Table} from "react-bootstrap";
+import {Box, CenterElement} from "./element/box";
 import React, {useContext} from "react";
 import ModalContext from "./context/modal-context";
 import styled from "styled-components";
-import axios from "axios";
-import Cookie from "js-cookie";
 import {useForm} from "react-hook-form";
 import AlertContext from "./context/alert-context";
-import {PasswordIcon, UserIcon} from "./element/icons";
-
-const BoxHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-`
+import Loader from "./element/loader";
+import {addCategory, updateCategory} from "../api/category";
+import {EditIcon} from "./element/icons";
 
 const Value = styled.span`
 `
@@ -23,32 +18,20 @@ const NegativeValue = styled(Value)`
   color: red;
 `
 
-const TotalBox = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`
-
 const Categories = (props) => {
-    const {categories, setCategories, loadedCategories} = props;
+    const {categories, setCategories, loadedData} = props;
     const {setOpen, setMessage, setStatusCode, setVariant} = useContext(AlertContext);
-    const { handleShow, handleClose, content, setContent, setHeading, setButtonTitle, setButtonFunction} = useContext(ModalContext);
+    const {
+        handleShow,
+        handleClose,
+        setContent,
+        setHeading,
+        setButtonTitle,
+    } = useContext(ModalContext);
     const {register, handleSubmit} = useForm();
 
-    const createAuthHeaders = (token) => {
-        return ({
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        })
-    }
-    const token = Cookie.get("token") ? Cookie.get("token") : null;
     const onSubmit = (data) => {
-        const API_URL = "http://localhost:8080"
-        console.log(data)
-        axios.post(`${API_URL}/category/add`, data, createAuthHeaders(token))
-            .then(response => {
-                console.log(response.data)
+        addCategory(data).then(response => {
                 setCategories(response.data)
             })
             .catch(function (error) {
@@ -66,8 +49,8 @@ const Categories = (props) => {
         handleShow()
         setButtonTitle("")
         setHeading("Add new category")
-        setContent(()=>{
-            return(
+        setContent(() => {
+            return (
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <InputGroup className="mb-3">
                         <InputGroup.Prepend>
@@ -94,26 +77,71 @@ const Categories = (props) => {
                             ref={register({required: true})}
                         />
                     </InputGroup>
-                    <Button type="submit" variant="success">Add new category</Button>
+                    <CenterElement>
+                        <Button type="submit" variant="success">Add new category</Button>
+                    </CenterElement>
                 </form>
             )
         })
-        // setButtonFunction(()=>{
-        //     axios.post(`${API_URL}/category/add`, data, createAuthHeaders(token))
-        //         .then(response => {
-        //             console.log(response.data)
-        //
-        //         })
-        //         .catch(function (error) {
-        //             if (error.response) {
-        //                 setOpen(true)
-        //                 setMessage(error.response.data.message)
-        //                 setStatusCode(error.response.status)
-        //                 setVariant("danger")
-        //             }
-        //         });
-        // })
     }
+
+    const onSubmitEditCategory = (data, categoryId) => {
+        updateCategory(data, categoryId).then(response => {
+                setCategories(response.data)
+            })
+            .catch(function (error) {
+                if (error.response) {
+                    setOpen(true)
+                    setMessage(error.response.data.message)
+                    setStatusCode(error.response.status)
+                    setVariant("danger")
+                }
+            });
+        handleClose()
+    }
+
+    const editCategory = (categoryId) => {
+        const category = categories.filter(obj => obj.categoryId === categoryId)[0]
+        handleShow()
+        setHeading("Edit category (" + category.name +")")
+        setContent(() => {
+            return (
+                <form onSubmit={handleSubmit((data)=>onSubmitEditCategory(data, categoryId))}>
+                    <InputGroup className="mb-3">
+                        <InputGroup.Prepend>
+                            <InputGroup.Text id="basic-addon1">Name:</InputGroup.Text>
+                        </InputGroup.Prepend>
+                        <FormControl
+                            name="name"
+                            placeholder="Your category name"
+                            aria-label="Your category name"
+                            aria-describedby="basic-addon1"
+                            defaultValue={category.name}
+                            ref={register({required: true})}
+                        />
+                    </InputGroup>
+                    <InputGroup className="mb-3">
+                        <InputGroup.Prepend>
+                            <InputGroup.Text id="basic-addon1">Description:</InputGroup.Text>
+                        </InputGroup.Prepend>
+                        <FormControl
+                            name="description"
+                            type="text"
+                            placeholder="Your category description"
+                            aria-label="Your category description"
+                            aria-describedby="basic-addon1"
+                            defaultValue={category.description}
+                            ref={register({required: true})}
+                        />
+                    </InputGroup>
+                    <CenterElement>
+                        <Button type="submit" variant="success">Save category</Button>
+                    </CenterElement>
+                </form>
+            )
+        })
+    }
+
     return (
         <Box>
             <Table striped bordered hover>
@@ -126,7 +154,7 @@ const Categories = (props) => {
                 </tr>
                 </thead>
                 <tbody>
-                {loadedCategories === false ? "Loading" : (
+                {loadedData === false ? (<Loader/>) : (
                     (categories.length > 0 ? (categories.map((category) => (
                             <tr>
                                 <td>{category.name}</td>
@@ -136,7 +164,9 @@ const Categories = (props) => {
                                     <NegativeValue>{Number(category.total).toFixed(2)}</NegativeValue>)}
                                 </td>
                                 <td>
-                                    <Button variant={"warning"} size="sm">Edit</Button>
+                                    <Button variant={"warning"} size="sm" onClick={()=> editCategory(category.categoryId)}>
+                                        <EditIcon/>
+                                    </Button>
                                 </td>
                             </tr>
                         ))) : (
@@ -148,7 +178,9 @@ const Categories = (props) => {
                 }
                 </tbody>
             </Table>
-            <Button variant="success" onClick={openModal}> Add new category </Button>
+            <CenterElement>
+                <Button variant="success" onClick={openModal}> Add new category </Button>
+            </CenterElement>
         </Box>
     )
 }

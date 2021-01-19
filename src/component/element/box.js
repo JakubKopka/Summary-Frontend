@@ -12,14 +12,14 @@ export const Box = styled.div`
   transition: box-shadow 200ms cubic-bezier(0.4, 0.3, 0.8, 0.6) 0s;
 `
 
-export const BottomBox = styled.div`
-  margin-top: 15px;
+export const BottomElements = styled.div`
+  //margin-top: 15px;
   display: flex;
   justify-content: space-between;
 `
 
-export const CenterBox = styled(BottomBox)`
-  margin-top: 30px;      
+export const CenterElement = styled(BottomElements)`
+  //margin-top: 30px;      
   justify-content: center;
   align-items: center;
   flex-direction: column;

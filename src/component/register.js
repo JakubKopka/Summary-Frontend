@@ -14,13 +14,11 @@ const Register = () => {
 
     const onSubmit = data => {
         if (data.password !== data.confirmPassword) {
-            console.log("Cos z hasłem" + data.password + " " + data.confirmPassword)
             setOpen(true)
             setMessage("Passwords don't match!")
             setVariant("danger")
         } else {
             registerUser(data).then(response => {
-                console.log(response)
                 setOpen(false)
                 setMessage("")
                 setRegisterSuccess(true)

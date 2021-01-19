@@ -1,21 +1,32 @@
 import React from "react";
 import Layout from "./layout/layout";
-import {Box, CenterBox} from "./element/box";
-import {Col, Image} from "react-bootstrap";
+import {Box, CenterElement} from "./element/box";
+import {Button, Col, Figure, Jumbotron} from "react-bootstrap";
+import {Link} from "react-router-dom";
+import styled from "styled-components";
 
+const JumbotronButtons = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
 const Home = () => {
     return (
         <Layout>
-            <Box>
-                <h2>Welcome at Summary.space</h2>
-                <Col xs={6} md={6}>
-                    <CenterBox>
-                        <Image
-                            src="https://cdn.icon-icons.com/icons2/1172/PNG/512/1489436625-chartmoneydollarcurrency_81885.png"
-                            rounded fluid/>
-                    </CenterBox>
-                </Col>
-            </Box>
+                <Jumbotron>
+                    <h1>Welcome at Summary!</h1>
+                    <p>
+                        You cane save your money with our application!
+                        Create free account or login.
+                    </p>
+                    <JumbotronButtons>
+                        <Link to="/register">
+                            <Button variant="primary">Create new account</Button>
+                        </Link>
+                        <Link to="/login">
+                            <Button variant="info">I have account</Button>
+                        </Link>
+                    </JumbotronButtons>
+                </Jumbotron>
         </Layout>
     )
 }

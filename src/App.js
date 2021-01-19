@@ -12,7 +12,7 @@ import UserProfile from "./component/user-profile";
 import Register from "./component/register";
 import Home from "./component/home";
 import PrivateRoute from "./component/route/private-route";
-import MySummary from "./component/my-summary";
+import Summary from "./component/summary";
 import AuthorizedOnlyRoute from "./component/route/authorized-only-route";
 import PublicRoute from "./component/route/public-route";
 import AlertContext from "./component/context/alert-context";
@@ -82,7 +82,7 @@ function App() {
                                    render={() => <AuthorizedOnlyRoute component={ResetPassword}/>}/>
 
                             <Route path="/user" render={() => <PrivateRoute component={UserProfile}/>}/>
-                            <Route path="/my-stock" render={() => <PrivateRoute component={MySummary}/>}/>
+                            <Route path="/my-stock" render={() => <PrivateRoute component={Summary}/>}/>
 
                             <Route path="/" render={() => <PublicRoute component={Home}/>}/>
                         </Switch>
