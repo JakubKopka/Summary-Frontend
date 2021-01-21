@@ -32,8 +32,8 @@ const Categories = (props) => {
 
     const onSubmit = (data) => {
         addCategory(data).then(response => {
-                setCategories(response.data)
-            })
+            setCategories(response.data)
+        })
             .catch(function (error) {
                 if (error.response) {
                     setOpen(true)
@@ -87,8 +87,8 @@ const Categories = (props) => {
 
     const onSubmitEditCategory = (data, categoryId) => {
         updateCategory(data, categoryId).then(response => {
-                setCategories(response.data)
-            })
+            setCategories(response.data)
+        })
             .catch(function (error) {
                 if (error.response) {
                     setOpen(true)
@@ -103,10 +103,10 @@ const Categories = (props) => {
     const editCategory = (categoryId) => {
         const category = categories.filter(obj => obj.categoryId === categoryId)[0]
         handleShow()
-        setHeading("Edit category (" + category.name +")")
+        setHeading("Edit category (" + category.name + ")")
         setContent(() => {
             return (
-                <form onSubmit={handleSubmit((data)=>onSubmitEditCategory(data, categoryId))}>
+                <form onSubmit={handleSubmit((data) => onSubmitEditCategory(data, categoryId))}>
                     <InputGroup className="mb-3">
                         <InputGroup.Prepend>
                             <InputGroup.Text id="basic-addon1">Name:</InputGroup.Text>
@@ -144,40 +144,39 @@ const Categories = (props) => {
 
     return (
         <Box>
-            <Table striped bordered hover>
-                <thead>
-                <tr>
-                    <th>Category name</th>
-                    <th>Description</th>
-                    <th>Total amount</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                {loadedData === false ? (<Loader/>) : (
-                    (categories.length > 0 ? (categories.map((category) => (
-                            <tr>
-                                <td>{category.name}</td>
-                                <td>{category.description}</td>
-                                <td>{category.total >= 0 ? (
-                                    <PositiveValue>{Number(category.total).toFixed(2)}</PositiveValue>) : (
-                                    <NegativeValue>{Number(category.total).toFixed(2)}</NegativeValue>)}
-                                </td>
-                                <td>
-                                    <Button variant={"warning"} size="sm" onClick={()=> editCategory(category.categoryId)}>
-                                        <EditIcon/>
-                                    </Button>
-                                </td>
-                            </tr>
-                        ))) : (
-                            <tr>
-                                <td colSpan="4"> No data!</td>
-                            </tr>
-                        )
-                    ))
-                }
-                </tbody>
-            </Table>
+            {loadedData === false ? (<Loader/>) : (
+                <Table striped bordered hover>
+                    <thead>
+                    <tr>
+                        <th>Category name</th>
+                        <th>Description</th>
+                        <th>Total amount</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {categories.length > 0 ? (categories.map((category) => (
+                    <tr>
+                        <td>{category.name}</td>
+                        <td>{category.description}</td>
+                        <td>{category.total >= 0 ? (
+                            <PositiveValue>{Number(category.total).toFixed(2)}</PositiveValue>) : (
+                            <NegativeValue>{Number(category.total).toFixed(2)}</NegativeValue>)}
+                        </td>
+                        <td>
+                            <Button variant={"warning"} size="sm" onClick={() => editCategory(category.categoryId)}>
+                                <EditIcon/>
+                            </Button>
+                        </td>
+                    </tr>
+                    ))) : (
+                    <tr>
+                        <td colSpan="4"> No data!</td>
+                    </tr>
+                    )}
+                    </tbody>
+                </Table>
+            )}
             <CenterElement>
                 <Button variant="success" onClick={openModal}> Add new category </Button>
             </CenterElement>
