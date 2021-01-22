@@ -82,7 +82,7 @@ function App() {
                                    render={() => <AuthorizedOnlyRoute component={ResetPassword}/>}/>
 
                             <Route path="/user" render={() => <PrivateRoute component={UserProfile}/>}/>
-                            <Route path="/my-stock" render={() => <PrivateRoute component={Summary}/>}/>
+                            <Route path="/summary" render={() => <PrivateRoute component={Summary}/>}/>
 
                             <Route path="/" render={() => <PublicRoute component={Home}/>}/>
                         </Switch>

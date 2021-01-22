@@ -36,7 +36,7 @@ const Menu = () => {
             <Link to="/"> <Button variant="light">Home</Button></Link>
             {token !== null ? (
                 <>
-                    <Link to="/my-stock">
+                    <Link to="/summary">
                         <Button variant="primary">MySummary</Button>
                     </Link>
                     <DropdownButton
