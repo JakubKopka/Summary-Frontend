@@ -34,12 +34,12 @@
   * #### Reset password
     ![Reset password screen](./img/reset_password.png)
   * #### User profile
-    ![User profile screen](.img/profile.png)
+    ![User profile screen](./img/profile.png)
 * ### My Summary
   * #### Months
-    ![Months screen](.img/months.png)
+    ![Months screen](./img/months.png)
   * #### Categories 
-    ![Categories screen](.img/categories.png)
+    ![Categories screen](./img/categories.png)
 
 
 
