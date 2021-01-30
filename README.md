@@ -25,21 +25,21 @@
 
 ## Screens from application
 * ### Home
-  ![Home screen](https://github.com/JakubKopka/Summary-Backend/tree/master/img/home.png)
+  ![Home screen](./img/home.png)
 * ### User 
   * #### Login
-    ![Login screen](https://github.com/JakubKopka/Summary-Backend/tree/master/img/login.png)
+    ![Login screen](./img/login.png)
   * #### Register
-    ![Registe screen](https://github.com/JakubKopka/Summary-Backend/tree/master/img/create_new_account.png)
+    ![Registe screen](./img/create_new_account.png)
   * #### Reset password
-    ![Reset password screen](https://github.com/JakubKopka/Summary-Backend/tree/master/img/reset_password.png)
+    ![Reset password screen](./img/reset_password.png)
   * #### User profile
-    ![User profile screen](https://github.com/JakubKopka/Summary-Backend/tree/master/imgimg/profile.png)
+    ![User profile screen](.img/profile.png)
 * ### My Summary
   * #### Months
-    ![Months screen](https://github.com/JakubKopka/Summary-Backend/tree/master/imgimg/months.png)
+    ![Months screen](.img/months.png)
   * #### Categories 
-    ![Categories screen](https://github.com/JakubKopka/Summary-Backend/tree/master/imgimg/categories.png)
+    ![Categories screen](.img/categories.png)
 
 
 
