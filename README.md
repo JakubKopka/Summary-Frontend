@@ -1,3 +1,49 @@
+# Summary Application
+
+## About project 
+...
+
+## Used technologies 
+* ### Frontend 
+  * React
+  * Axios
+  * Styled Components
+  * React Form
+  * React Bootstrap 
+  * React Context
+
+* ### Backend 
+  * Spring Boot 
+  * Spring Security 
+  * JWT
+  * Hibernate 
+  * MySQL
+  * AOP
+  * Unit test
+  * Integration testing
+
+
+## Screens from application
+* ### Home
+  ![Home screen](https://github.com/JakubKopka/Summary-Backend/tree/master/img/home.png)
+* ### User 
+  * #### Login
+    ![Login screen](https://github.com/JakubKopka/Summary-Backend/tree/master/img/login.png)
+  * #### Register
+    ![Registe screen](https://github.com/JakubKopka/Summary-Backend/tree/master/img/create_new_account.png)
+  * #### Reset password
+    ![Reset password screen](https://github.com/JakubKopka/Summary-Backend/tree/master/img/reset_password.png)
+  * #### User profile
+    ![User profile screen](https://github.com/JakubKopka/Summary-Backend/tree/master/imgimg/profile.png)
+* ### My Summary
+  * #### Months
+    ![Months screen](https://github.com/JakubKopka/Summary-Backend/tree/master/imgimg/months.png)
+  * #### Categories 
+    ![Categories screen](https://github.com/JakubKopka/Summary-Backend/tree/master/imgimg/categories.png)
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
