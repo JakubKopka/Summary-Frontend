@@ -1,7 +1,9 @@
 # Summary Application
 
 ## About project 
-...
+Summary application is used to summarize your monthly expenses and income.
+You can add your expense or income to your own category and month. 
+This application helps you to saving and summarizing your money. 
 
 ## Used technologies 
 * ### Frontend 
